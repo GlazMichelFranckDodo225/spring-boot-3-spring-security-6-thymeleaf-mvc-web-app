@@ -1,6 +1,6 @@
 package com.dgmf.controller;
 
-import com.dgmf.entity.user.User;
+import com.dgmf.dto.UserDTO;
 import com.dgmf.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/registration")
 @RequiredArgsConstructor
-public class UserController {
+public class RegistrationController {
     private final UserService userService;
 
-    @GetMapping
-    public String getUser(Model model) {
-        model.addAttribute("allUsers", userService.getAllUsers());
+    @GetMapping("/registration-form")
+    public String showRegistrationForm(Model model) {
+        model.addAttribute("userDTO", new UserDTO());
 
-        return "users";
+        return "registration";
     }
 }

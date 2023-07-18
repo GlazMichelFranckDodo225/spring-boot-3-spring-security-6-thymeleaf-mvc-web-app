@@ -2,7 +2,7 @@ package com.dgmf.service.impl;
 
 import com.dgmf.entity.user.Role;
 import com.dgmf.entity.user.User;
-import com.dgmf.dto.registration.RegistrationRequest;
+import com.dgmf.dto.UserDTO;
 import com.dgmf.repository.UserRepository;
 import com.dgmf.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registerUser(RegistrationRequest registration) {
+    public User registerUser(UserDTO registration) {
         var user = new User(
                 registration.getFirstName(),
                 registration.getLastName(),

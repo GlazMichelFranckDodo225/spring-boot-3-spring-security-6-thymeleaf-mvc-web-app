@@ -1,15 +1,12 @@
-package com.dgmf.dto.registration;
+package com.dgmf.dto;
 
 import com.dgmf.entity.user.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-public class RegistrationRequest {
+public class UserDTO {
     private String firstName;
     private String lastName;
     private String email;
