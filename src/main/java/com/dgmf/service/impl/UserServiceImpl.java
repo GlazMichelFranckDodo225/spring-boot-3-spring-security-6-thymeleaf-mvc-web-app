@@ -23,12 +23,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registerUser(UserDTO registration) {
+    public User registerUser(UserDTO userDTO) {
         var user = new User(
-                registration.getFirstName(),
-                registration.getLastName(),
-                registration.getEmail(),
-                registration.getPassword(),
+                userDTO.getFirstName(),
+                userDTO.getLastName(),
+                userDTO.getEmail(),
+                userDTO.getPassword(),
                 Arrays.asList(new Role("ROLE_USER")));
 
         return user;
