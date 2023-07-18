@@ -2,8 +2,10 @@ package com.dgmf.controller;
 
 import com.dgmf.dto.UserDTO;
 import com.dgmf.entity.user.User;
+import com.dgmf.event.RegistrationCompleteEvent;
 import com.dgmf.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class RegistrationController {
     private final UserService userService;
+    private ApplicationEventPublisher publisher;
 
     @GetMapping("/registration-form")
     public String showRegistrationForm(Model model) {
@@ -27,7 +30,8 @@ public class RegistrationController {
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") UserDTO userDTO) {
         User user = userService.registerUser(userDTO);
-        // Publish the verification email event here
+        // Publish the verification email event after saving User in DB
+        publisher.publishEvent(new RegistrationCompleteEvent(user, ""));
 
         return "redirect:/registration/registration-form?success";
     }
