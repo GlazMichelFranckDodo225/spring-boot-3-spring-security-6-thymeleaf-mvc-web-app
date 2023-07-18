@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
@@ -32,14 +33,21 @@ public class User {
     // spécifiques à Hibernate, du parent (User) à l'entité enfant (Role)
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     // Specifies the table used for the joining foreign-keys
-    @JoinTable(
-            name = "user_roles",
+    @JoinTable(name = "user_roles",
             // Defines mapping for composite foreign keys (marks a column
             // as a join column for an entity association)
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id")
+            joinColumns = @JoinColumn(name = "user_id",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id",
+                    referencedColumnName = "id")
     )
     private Collection<Role> roles;
+
+    public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
 }

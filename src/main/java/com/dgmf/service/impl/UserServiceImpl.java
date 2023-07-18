@@ -1,14 +1,16 @@
 package com.dgmf.service.impl;
 
+import com.dgmf.entity.user.Role;
 import com.dgmf.entity.user.User;
-import com.dgmf.registration.RegistrationRequest;
+import com.dgmf.dto.registration.RegistrationRequest;
 import com.dgmf.repository.UserRepository;
 import com.dgmf.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,16 +19,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return userRepository.findAll();
     }
 
     @Override
-    public User registerUser(RegistrationRequest registrationRequest) {
-        return null;
+    public User registerUser(RegistrationRequest registration) {
+        var user = new User(
+                registration.getFirstName(),
+                registration.getLastName(),
+                registration.getEmail(),
+                registration.getPassword(),
+                Arrays.asList(new Role("ROLE_USER")));
+
+        return user;
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        return Optional.empty();
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException("User Not Found")
+        );
     }
 }
