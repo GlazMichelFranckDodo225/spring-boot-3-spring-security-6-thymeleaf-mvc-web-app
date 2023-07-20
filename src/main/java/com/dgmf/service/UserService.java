@@ -9,4 +9,6 @@ public interface UserService {
     List<User> getAllUsers();
     User registerUser(UserDTO userDTO);
     User findByEmail(String email);
+    User getById(Long id);
+    void deleteById(Long id);
 }

@@ -40,4 +40,14 @@ public class UserServiceImpl implements UserService {
                 () -> new UsernameNotFoundException("User Not Found")
         );
     }
+
+    @Override
+    public User getById(Long id) {
+        return null;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
 }

@@ -27,7 +27,7 @@ public class RegistrationController {
         return "registration";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/register")   
     public String registerUser(@ModelAttribute("user") UserDTO userDTO) {
         User user = userService.registerUser(userDTO);
         // Publish the verification email event after saving User in DB
